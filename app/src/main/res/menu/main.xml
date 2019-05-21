@@ -1,0 +1,36 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.iss.bookactivity.MainActivity">
+
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/setup"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/action_settings">
+        <menu>
+            <group>
+                <item
+                    android:id="@+id/itemmyorder"
+                    android:title="我的订单" />
+                <item
+                    android:id="@+id/itemcheckupdate"
+                    android:title="更新" />
+
+                <item
+                    android:id="@+id/share"
+                    android:title="分享此软件"
+                    android:visible="false" />
+                <item
+                    android:id="@+id/itemabout"
+                    android:title="关于" />
+
+                <item
+                    android:id="@+id/loginout"
+                    android:title="退出登录" />
+
+            </group>
+        </menu>
+    </item>
+
+</menu>

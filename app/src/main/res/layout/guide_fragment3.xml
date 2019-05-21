@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/guid_show3"
+    android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"
+    android:gravity="bottom"
+    android:layout_gravity="center"
+    android:orientation="vertical" >
+
+    <ImageButton
+        android:id="@+id/ibtngo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:src="@drawable/guide_btn" />
+
+</LinearLayout>
