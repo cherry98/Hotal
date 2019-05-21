@@ -102,6 +102,29 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         hotellist = (ListView) findViewById(R.id.hotellistview);
+        // 设置点击酒店简介之后的行为
+        hotellist.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Intent intent = new Intent();
+                intent.setClass(getApplicationContext(), ActivityHotelOrder.class);
+                //利用intent在两个activity之间传值
+                //将酒店信息传给下一个activity
+                intent.putExtra("hotelid", ((Map) list.get(position)).get("hotelid").toString());
+                intent.putExtra("hotelname", ((Map) list.get(position)).get("hotelname").toString());
+                intent.putExtra("hoteltype", ((Map) list.get(position)).get("hoteltype").toString());
+                intent.putExtra("hotelprice", ((Map) list.get(position)).get("hotelprice").toString());
+                intent.putExtra("hotelsize", ((Map) list.get(position)).get("hotelsize").toString());
+                intent.putExtra("hotelnum", ((Map) list.get(position)).get("hotelnum").toString());
+                intent.putExtra("hotelount", ((Map) list.get(position)).get("hotelmount").toString());
+
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    private void getHotelList() {
         FinalHttp http = new FinalHttp();
         String url = "http://47.104.167.198:8080/HotelServer/hotelservlet1";
         http.get(url, new AjaxCallBack<Object>() {
@@ -113,7 +136,7 @@ public class MainActivity extends Activity {
             @Override
             public void onLoading(long count, long current) {
                 super.onLoading(count, current);
-                Toast.makeText(MainActivity.this, "正在载入酒店信息,请稍后...", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "正在载入酒店信息,请稍后...", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -129,27 +152,12 @@ public class MainActivity extends Activity {
                 Toast.makeText(MainActivity.this, "获取数据失败", Toast.LENGTH_LONG).show();
             }
         });
+    }
 
-        // 设置点击酒店简介之后的行为
-        hotellist.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent intent = new Intent();
-                intent.setClass(getApplicationContext(), ActivityHotelOrder.class);
-                //利用intent在两个activity之间传值
-                //将酒店信息传给下一个activity
-                intent.putExtra("hotelid", ((Map) list.get(position)).get("hotelid").toString());
-                intent.putExtra("hotelname", ((Map) list.get(position)).get("hotelname").toString());
-                intent.putExtra("hoteltype", ((Map) list.get(position)).get("hoteltype").toString());
-                intent.putExtra("hotelprice", ((Map) list.get(position)).get("hotelprice").toString());
-                intent.putExtra("hotelsize",((Map) list.get(position)).get("hotelsize").toString());
-                intent.putExtra("hotelnum", ((Map) list.get(position)).get("hotelnum").toString());
-                intent.putExtra("hotelount", ((Map) list.get(position)).get("hotelmount").toString());
-
-                startActivity(intent);
-            }
-        });
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getHotelList();
     }
 
     class MyAdapter extends BaseAdapter {
@@ -252,6 +260,7 @@ public class MainActivity extends Activity {
         if (id == R.id.loginout) {
             //退出时清除用户登录
             SharedPreferenceUtils.setLoginornot(this, 0);
+            SharedPreferenceUtils.setUserId(this, "");
             startActivity(new Intent(this, LoginActivity.class));
         }
 

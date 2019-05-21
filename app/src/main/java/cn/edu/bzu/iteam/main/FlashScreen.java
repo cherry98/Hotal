@@ -19,7 +19,7 @@ public class FlashScreen extends Activity {
         setContentView(R.layout.flashscreen);
 
 
-        SharedPreferenceUtils.setLoginornot(this, 0);
+//        SharedPreferenceUtils.setLoginornot(this, 0);
 
 
         Handler handler = new Handler();

@@ -68,7 +68,7 @@ public class    RegisterActivity extends Activity {
 
             @Override
             public void onStart() {
-                Toast.makeText(RegisterActivity.this, "注册中.....", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(RegisterActivity.this, "注册中.....", Toast.LENGTH_SHORT).show();
             }
 
             @Override

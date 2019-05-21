@@ -97,7 +97,7 @@ public class ActivityHotelOrder extends Activity {
         ghotelprice = this.getIntent().getExtras().getString("hotelprice");
         ghotelsize = this.getIntent().getExtras().getString("hotelsize");
         ghotelnum = this.getIntent().getExtras().getString("hotelnum");
-        ghotelmount = this.getIntent().getExtras().getString("hotelsize");
+        ghotelmount = this.getIntent().getExtras().getString("hotelount");
 
 //		System.out.println("------------------这是宾馆ID-----------------"+ghotelid);
 
@@ -215,9 +215,9 @@ public class ActivityHotelOrder extends Activity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Intent myIntent = new Intent();
-            myIntent = new Intent(ActivityHotelOrder.this, MainActivity.class);
-            startActivity(myIntent);
+//            Intent myIntent = new Intent();
+//            myIntent = new Intent(ActivityHotelOrder.this, MainActivity.class);
+//            startActivity(myIntent);
             this.finish();
         }
         return super.onKeyDown(keyCode, event);

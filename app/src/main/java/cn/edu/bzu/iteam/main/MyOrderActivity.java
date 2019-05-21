@@ -38,6 +38,13 @@ public class MyOrderActivity extends Activity {
     }
 
     private void myoderList() {
+        if (SharedPreferenceUtils.getLoginornot(this) != 1) {
+            Intent intent = new Intent();
+            intent.setClass(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
         FinalHttp http = new FinalHttp();
         String url = "http://47.104.167.198:8080/HotelServer/orderlist";
         AjaxParams params = new AjaxParams();
@@ -51,7 +58,7 @@ public class MyOrderActivity extends Activity {
             @Override
             public void onLoading(long count, long current) {
                 super.onLoading(count, current);
-                Toast.makeText(MyOrderActivity.this, "正在载入订单信息,请稍后...", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MyOrderActivity.this, "正在载入订单信息,请稍后...", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -192,6 +199,7 @@ public class MyOrderActivity extends Activity {
             public void onSuccess(Object o) {
                 super.onSuccess(o);
                 Toast.makeText(MyOrderActivity.this, "退房成功", Toast.LENGTH_SHORT).show();
+                myoderList();
             }
 
             @Override
