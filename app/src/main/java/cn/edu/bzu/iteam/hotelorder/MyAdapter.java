@@ -42,7 +42,7 @@ public class MyAdapter extends BaseAdapter {
         TextView textView = (TextView) view.findViewById(R.id.content);
 
         String username = ((Map) list.get(i)).get("username").toString();
-        String photelevaluate = ((Map) list.get(i)).get("photelevaluate").toString();
+        String photelevaluate = ((Map) list.get(i)).get("hotelnote").toString();
         textView.setText(username + "：" + photelevaluate);
         return view;
     }

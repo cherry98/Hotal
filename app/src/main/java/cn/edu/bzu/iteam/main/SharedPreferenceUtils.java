@@ -21,9 +21,9 @@ public class SharedPreferenceUtils {
         editor.commit();
     }
 
-    public static String getUserId(Context context, String defaultUsid) {
+    public static String getUserId(Context context) {
         SharedPreferences sharedpreferences = context.getSharedPreferences("login", MODE_PRIVATE);
-        return sharedpreferences.getString("userid", defaultUsid);
+        return sharedpreferences.getString("userid", "");
     }
 
     public static int getLoginornot(Context context) {

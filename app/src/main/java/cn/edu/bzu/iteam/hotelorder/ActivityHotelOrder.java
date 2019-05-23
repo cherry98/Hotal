@@ -40,7 +40,7 @@ public class ActivityHotelOrder extends Activity {
     private ImageButton btnhotelorder;
     private Gallery gallery;
     private String ghotelid = "20";//用于获取在酒店信息简介activity上带过来的值   酒店id
-    private String guserid = "7";//	用户id
+//    private String guserid = "7";//	用户id
     private String ghotelname;
     private String ghoteltype;
     private String ghotelprice;
@@ -238,11 +238,11 @@ public class ActivityHotelOrder extends Activity {
         } else if (SharedPreferenceUtils.getLoginornot(this) == 1) {
 
 
-            guserid = SharedPreferenceUtils.getUserId(this, "3");
+//            guserid = SharedPreferenceUtils.getUserId(this);
 
 
-            System.out.println("这是-----------" + guserid + "-----" + ghotelid);
-            params.put("userid", guserid);
+//            System.out.println("这是-----------" + guserid + "-----" + ghotelid);
+            params.put("userid", SharedPreferenceUtils.getUserId(this));
             params.put("hotelid", ghotelid);
 
             http.get(url + "order", params, new AjaxCallBack<Object>() {

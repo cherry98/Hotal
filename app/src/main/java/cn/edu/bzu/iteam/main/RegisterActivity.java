@@ -16,10 +16,11 @@ import net.tsz.afinal.http.AjaxParams;
 
 import cn.edu.bzu.iteam.idingfang.R;
 
-public class    RegisterActivity extends Activity {
+public class RegisterActivity extends Activity {
 
     EditText rootname;
     EditText rootpwd;
+    EditText rootpwd2;
     Button btn_register;
 
     String url = "http://47.104.167.198:8080/HotelServer/";
@@ -30,18 +31,28 @@ public class    RegisterActivity extends Activity {
         setContentView(R.layout.activity_register);
         rootname = (EditText) findViewById(R.id.etloginname);
         rootpwd = (EditText) findViewById(R.id.etloginpwd);
+        rootpwd2 = (EditText) findViewById(R.id.etloginpwd2);
         btn_register = (Button) findViewById(R.id.btnregit);
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name = rootname.getText().toString();
                 String pwd = rootpwd.getText().toString();
+                String pwd2 = rootpwd2.getText().toString();
                 if (TextUtils.isEmpty(name)) {
                     Toast.makeText(RegisterActivity.this, getString(R.string.username), Toast.LENGTH_LONG).show();
                     return;
                 }
                 if (TextUtils.isEmpty(pwd)) {
                     Toast.makeText(RegisterActivity.this, getString(R.string.pwd), Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(pwd2)) {
+                    Toast.makeText(RegisterActivity.this, getString(R.string.pwd2), Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (!pwd.equals(pwd2)) {
+                    Toast.makeText(RegisterActivity.this, "两次密码输入不一样", Toast.LENGTH_LONG).show();
                     return;
                 }
                 register(name, pwd);

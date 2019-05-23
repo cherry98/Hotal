@@ -72,8 +72,13 @@ public class MyEvaluateActivity extends Activity {
             @Override
             public void onSuccess(Object o) {
                 super.onSuccess(o);
-                Toast.makeText(MyEvaluateActivity.this, "评论成功", Toast.LENGTH_LONG).show();
-                finish();
+                if (o.toString().startsWith("success")) {
+                    Toast.makeText(MyEvaluateActivity.this, "评论成功", Toast.LENGTH_LONG).show();
+                    finish();
+                } else {
+                    //System.out.println(t.toString() + "123456");
+                    Toast.makeText(MyEvaluateActivity.this, "评论失败", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override

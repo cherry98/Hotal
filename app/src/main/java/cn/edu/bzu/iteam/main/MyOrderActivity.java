@@ -48,7 +48,7 @@ public class MyOrderActivity extends Activity {
         FinalHttp http = new FinalHttp();
         String url = "http://47.104.167.198:8080/HotelServer/orderlist";
         AjaxParams params = new AjaxParams();
-        params.put("uid", SharedPreferenceUtils.getUserId(this, "3"));
+        params.put("uid", SharedPreferenceUtils.getUserId(this));
         http.get(url, params, new AjaxCallBack<Object>() {
             @Override
             public void onStart() {
@@ -117,7 +117,7 @@ public class MyOrderActivity extends Activity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             convertView = LayoutInflater.from(MyOrderActivity.this).inflate(R.layout.item_my_order, null);
             TextView order_name = (TextView) convertView.findViewById(R.id.order_name);
             TextView oder_price = (TextView) convertView.findViewById(R.id.oder_price);
@@ -149,10 +149,7 @@ public class MyOrderActivity extends Activity {
                 order_evaluate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(MyOrderActivity.this, MyEvaluateActivity.class);
-                        intent.putExtra("id", id);
-                        intent.putExtra("uid", SharedPreferenceUtils.getUserId(MyOrderActivity.this, "3"));
-                        startActivity(intent);
+                        evaluate(position);
                     }
                 });
             } else {
@@ -161,11 +158,10 @@ public class MyOrderActivity extends Activity {
                 order_note.setText(photelevaluate);
                 order_checkout.setVisibility(View.GONE);
             }
-            final String hotelid = ((Map) list.get(position)).get("hotelid").toString();
             order_checkout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    checkOut(id, hotelid);
+                    checkOut(position);
                 }
             });
             order_name.setText("商家：" + photelname);
@@ -178,12 +174,19 @@ public class MyOrderActivity extends Activity {
         }
     }
 
-    private void checkOut(String id, String hotelid) {
+    private void evaluate(int position) {
+        Intent intent = new Intent(MyOrderActivity.this, MyEvaluateActivity.class);
+        intent.putExtra("id", ((Map) list.get(position)).get("id").toString());
+        intent.putExtra("uid", SharedPreferenceUtils.getUserId(MyOrderActivity.this));
+        startActivity(intent);
+    }
+
+    private void checkOut(int position) {
         FinalHttp http = new FinalHttp();
         String url = "http://47.104.167.198:8080/HotelServer/outuserhotel";
         AjaxParams params = new AjaxParams();
-        params.put("oid", id);
-        params.put("hid", hotelid);
+        params.put("oid", ((Map) list.get(position)).get("id").toString());
+        params.put("hid", ((Map) list.get(position)).get("hotelid").toString());
         http.get(url, params, new AjaxCallBack<Object>() {
             @Override
             public void onStart() {
@@ -198,8 +201,10 @@ public class MyOrderActivity extends Activity {
             @Override
             public void onSuccess(Object o) {
                 super.onSuccess(o);
-                Toast.makeText(MyOrderActivity.this, "退房成功", Toast.LENGTH_SHORT).show();
-                myoderList();
+                if (o.toString().startsWith("success")) {
+                    Toast.makeText(MyOrderActivity.this, "退房成功", Toast.LENGTH_SHORT).show();
+                    myoderList();
+                }
             }
 
             @Override
