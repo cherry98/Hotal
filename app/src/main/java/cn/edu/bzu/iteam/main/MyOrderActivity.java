@@ -34,8 +34,8 @@ public class MyOrderActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_order);
         listView = (ListView) findViewById(R.id.myorder_listview);
-        myoderList();
     }
+
 
     private void myoderList() {
         if (SharedPreferenceUtils.getLoginornot(this) != 1) {

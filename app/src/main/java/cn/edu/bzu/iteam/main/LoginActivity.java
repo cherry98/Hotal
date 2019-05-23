@@ -90,8 +90,8 @@ public class LoginActivity extends Activity {
 
                 if (t.toString().startsWith("success")) {
                     Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-
-                    userid = (t.toString().charAt(8)) + "";
+                    String str = t.toString();
+                    userid = (str.substring(8, str.length())) + "";
                     loginOrnot = 1;
                     SharedPreferenceUtils.setUserId(LoginActivity.this, userid);
                     SharedPreferenceUtils.setLoginornot(LoginActivity.this, 1);
